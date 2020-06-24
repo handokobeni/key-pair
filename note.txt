@@ -1,0 +1,11 @@
+generate private key
+openssl genrsa -out bigasecret.pem 4096
+
+generate public key
+openssl rsa -in bigasecret.pem -pubout > bigasecret.pub
+
+create certificate
+openssl req -key bigasecret.pem -new -x509 -days 365 -out bigapublic.crt
+
+create pkcs file
+openssl pkcs12 -inkey bigasecret.pem -in bigapublic.crt -export -out bigakeypair.p12
